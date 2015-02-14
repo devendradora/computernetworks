@@ -1,0 +1,99 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<signal.h>
+#include<sys/sem.h>
+#include<sys/shm.h>
+#define KEY_C2 666
+
+int shm_id,*shm_c2,c2;
+int sem_id;
+
+pid_t pid,*shmptr;
+
+void P(int sem_id)
+{
+   struct sembuf buf;
+   buf.sem_op = -1;
+   buf.sem_flg = 0;
+   buf.sem_num = 0;
+
+   semop(sem_id, &buf , 1);
+}
+
+void V(int sem_id)
+{
+   struct sembuf buf;
+   buf.sem_op = 1;
+   buf.sem_flg = 0;
+   buf.sem_num = 0;
+
+   semop(sem_id, &buf, 1);
+}
+
+int init_shm(int key, int size , int flg)
+{
+  if((shmget(key,size, flg)) == -1)
+  {
+    printf("shared memory error");
+    perror("shmget");
+    exit(1);
+  }
+}
+
+int init_sem(int key, int nsem , int flg)
+{
+  if((shmget(key,nsem, flg)) == -1)
+  {
+    printf("semaphore error");
+    perror("semget");
+    exit(1);
+  }
+}
+
+void create_shared_objects()
+{
+ c2 = init_shm(KEY_C2, 1, IPC_CREAT | 0666);
+   
+   shm_c2= (int*)shmat(c2, NULL, 0);
+}
+
+void sig_handler(int signal)
+{
+   if(signal == SIGUSR2)
+   {
+     printf("Server accessed Client 2\n");
+     shm_c2= (int*)shmat(c2, NULL, 0);
+     printf("Client 2 Received message  %d from Client 1 via server ",*shm_c2);
+     P(sem_id);
+     kill(*shmptr,SIGUSR2);
+     *shmptr = pid;
+     V(sem_id);
+     sleep(rand() % 3);
+   }
+}
+
+
+int main()
+{
+   pid = getpid();
+   int key  = ftok(".",'b');
+   shm_id = init_shm(key,sizeof(pid_t),IPC_CREAT | 0666);
+   
+   
+   shmptr = (pid_t*)shmat(shm_id,NULL,0);
+
+   sem_id= init_sem(key,1,IPC_CREAT|0666);
+   
+   semctl(sem_id,0,SETVAL,0);
+  
+   create_shared_objects();
+   signal(SIGUSR2, sig_handler);
+
+   *shmptr = pid;
+   while(1)
+     sleep(1);
+   
+   
+}
+
+

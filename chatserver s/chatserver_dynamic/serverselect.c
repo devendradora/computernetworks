@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<sys/types.h>
+#include<sys/stat.h>
+#include<fcntl.h>
+#include<unistd.h>
+#define MAX 100
+int main()
+{
+        char *myfifo = "/tmp/myfifo";
+        int fp,fpo[100],no_clients=0,i;
+        char msg[MAX];
+
+        printf("Creating Pipe...Waiting for receiver for Process...\n");
+
+        mkfifo(myfifo,0666);
+
+
+
+while(1)
+{
+	printf("micky \n");
+        fp = open(myfifo,O_RDONLY);
+        printf("client connected\n");
+
+        while(read(fp,msg,sizeof(msg)) > 0)
+        {
+                printf("\nMessage : ");
+                puts(msg);
+
+            if(strncmp(msg,"/tmp/",5)==0)
+            {
+                fpo[no_clients]=open(msg,O_WRONLY);
+                no_clients++;
+                if(fpo[no_clients-1]>0) { printf("client added\n");} else { printf("could not add client\n");}
+            } else
+            for(i=0;i<no_clients;i++)
+            if(write(fpo[i],msg,sizeof(msg)) > 0)
+            { printf("Message has been sent to FIFO (Named Pipe)\n"); }
+
+
+        }
+
+        if(close(fp) < 0)
+        {
+                perror("Error closing FIFO (Named Pipe)\n");
+                exit(-4);
+        }
+ }
+        return 0;
+}

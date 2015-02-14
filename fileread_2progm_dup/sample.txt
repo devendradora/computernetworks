@@ -1,0 +1,11 @@
+Open source is that where one can explore many 
+new things , view, share, redistribute source code
+of any open source project which may be free or charged.
+The open source project which is free is FOSS .
+Most of the open source organizations have a lot to help
+a newbie to contribute to their Software. Almost all the 
+organizations have something to file a bug, try to
+list them in easy to hard order. Many organizations have 
+specific helps for newbies. For ex: Mozilla has What can I do 
+for Mozilla, GNOME has GnomeLove, Linux Kernel has 
+Linux Kernel    Newbies,  all for newbies.

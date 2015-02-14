@@ -1,0 +1,50 @@
+devicedriver
+chat_select/c2
+chat_select/c3
+chat_select/c1
+chat_select/s
+devicedriver/usbdrive/usbdrive.ko
+devicedriver/softwarekeyboard/evtest
+devicedriver/softwarekeyboard/uinput-move-mouse-upper-left
+devicedriver/usbdriver2/gotemp.ko
+devicedriver/mouse/mouse.ko
+devicedriver/mousesimulator/mousesimulator.ko
+devicedriver/hellodev/hellodev.ko
+sc_signals/objclient2
+sc_signals/objclient1
+sc_signals/objserver
+chat_signals/c2
+chat_signals/c3
+chat_signals/c1
+chat_signals/s
+sockets/chatserver_tcp/c
+sockets/chatserver_tcp/s
+sockets/multisevice_server/c
+sockets/multisevice_server/s
+sockets/client_server/a.out
+sockets/client_server/c
+sockets/client_server/c1
+sockets/client_server/s
+sockets/chatserver_udp/c
+sockets/chatserver_udp/s
+chat_poll/c2
+chat_poll/c3
+chat_poll/c1
+chat_poll/s
+fileread_2progm_dup/f2
+fileread_2progm_dup/a.out
+fileread_2progm_dup/f1
+fileread_2progm_dup/objf2
+chat_dynamicclients/c
+chat_dynamicclients/s
+chatserver s/chatserver_dynamic/clientselect
+chatserver s/chatserver_dynamic/clientgroup
+chatserver s/chatserver_dynamic/serverselect
+chatserver s/chatserver_dynamic/servergroup
+chatserver s/chatserver_signals/client2
+chatserver s/chatserver_signals/client1
+chatserver s/chatserver_signals/server
+file_server_pipe/c
+file_server_pipe/s
+chat_group_dynamicclients/c
+chat_group_dynamicclients/s
