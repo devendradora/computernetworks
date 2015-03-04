@@ -48,3 +48,11 @@ file_server_pipe/c
 file_server_pipe/s
 chat_group_dynamicclients/c
 chat_group_dynamicclients/s
+sockets/tcp_chatserver/c
+sockets/tcp_chatserver/s
+sockets/prethreaded_preforked chatserver/c
+sockets/prethreaded_preforked chatserver/s
+sockets/udp_chatserver/c
+sockets/udp_chatserver/s
+sockets/inetd_chatserver/c
+sockets/inetd_chatserver/s
