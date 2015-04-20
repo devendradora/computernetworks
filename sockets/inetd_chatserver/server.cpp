@@ -47,22 +47,22 @@ int main()
 
  pthread_t t1;
  socklen_t cllen;
- for(i=0;i<5;i++){
-  if(i!=2 && i!=4)
-    sfd[i]=socket(AF_INET,SOCK_STREAM,0);
-  else
-    sfd[i]=socket(AF_INET,SOCK_DGRAM,0);
+ 	for(i=0;i<5;i++){
+		  if(i!=2 && i!=4)
+		    sfd[i]=socket(AF_INET,SOCK_STREAM,0);
+		  else
+		    sfd[i]=socket(AF_INET,SOCK_DGRAM,0);
 
-  bzero(&seradd[i],sizeof(struct sockaddr_in));   
-  bzero(&cladd,sizeof(struct sockaddr_in));
-  seradd[i].sin_addr.s_addr=htonl(INADDR_ANY);
-  seradd[i].sin_port=htons(portno[i]);
-  seradd[i].sin_family=AF_INET;
-  bind(sfd[i],(struct sockaddr *)&seradd[i],sizeof(struct sockaddr_in));
+		  bzero(&seradd[i],sizeof(struct sockaddr_in));   
+		  bzero(&cladd,sizeof(struct sockaddr_in));
+		  seradd[i].sin_addr.s_addr=htonl(INADDR_ANY);
+		  seradd[i].sin_port=htons(portno[i]);
+		  seradd[i].sin_family=AF_INET;
+		  bind(sfd[i],(struct sockaddr *)&seradd[i],sizeof(struct sockaddr_in));
 
-  if(i!=2 && i!=4)
-    listen(sfd[i],maxcl[i]);
-}
+		  if(i!=2 && i!=4)
+		    listen(sfd[i],maxcl[i]);
+	}
 
 FD_ZERO(&rfds);
 max=sfd[0];
